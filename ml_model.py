@@ -74,10 +74,10 @@ class MachineLearningModels:
             self.data['temp_humid_interaction'] = self.data['temp'] * self.data['humid']
 
             # Missing value processing
-            self.data = self.data.fillna(method='ffill').fillna(method='bfill')
+            self.data = self.data.ffill().bfill()
 
             # Check missing value
-            if self.data.isnull().values.any().any():
+            if self.data.isnull().values.any():
                 print('Warning: Still have missing values after imputation.')
                 # fill if it existed
                 self.data = self.data.fillna(self.data.mean())
@@ -125,8 +125,6 @@ class MachineLearningModels:
             self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
                 X_scaled, y, test_size=test_size, random_state=42
             )
-
-            return self.X_train, self.X_test, self.y_train, self.y_test
 
             # Final check
             assert not np.isnan(self.X_train).any(), "Training data contains NaN"

@@ -40,7 +40,7 @@ class AirQualityAnalysis:
             self.data['day_of_week'] = self.data.index.dayofweek
 
             # 5. Missing value processing
-            self.data = self.data.interpolate(method='ffill')
+            self.data = self.data.ffill()
 
             print("\nSample after preprocessing:")
             print(self.data.head())
@@ -245,14 +245,15 @@ class ModelEvaluationSystem:
 def main():
     # Train machine learning model
     ml_model = MachineLearningModels()
-    ml_model.prepare_data()
-    ml_predictions = ml_model.train_model()
+    ml_model.load_and_preprocess()
+    ml_model.prepare_model_data()
+    ml_model.train_random_forest_model()
 
     # Evaluate in details through 'ModelEvaluationSystem'
     evaluator = ModelEvaluationSystem()
     evaluator.evaluate_model(
         y_true=ml_model.y_test,
-        y_pred=ml_predictions,
+        y_pred=ml_model.predictions,
         model_name="RandomForest"
     )
 

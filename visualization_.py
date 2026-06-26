@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 import numpy as np
-import sns
+import seaborn as sns
 from matplotlib import pyplot as plt
 from main import AirQualityAnalysis
 
@@ -126,7 +126,7 @@ class AirQualityVisualizer:
         sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
         plt.title('Environmental Parameters Correlation')
 
-        plt.savefig(f"{self.output_dir['figures']}/parameter_correlations.png")
+        plt.savefig(f"{self.output_dir}/parameter_correlations.png")
         plt.close()
 
     def plot_time_series(self, days=7):
