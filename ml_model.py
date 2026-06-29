@@ -17,6 +17,7 @@ class MachineLearningModels:
         self.y_test = None
         self.model = None
         self.predictions = None
+        self.scaler = None
 
     def load_and_preprocess(self):
         """ Load and process data """
@@ -120,6 +121,7 @@ class MachineLearningModels:
             # Standard the number
             scaler = StandardScaler()
             X_scaled = scaler.fit_transform(X)
+            self.scaler = scaler
 
             # Split training set and test set
             self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
